@@ -11,6 +11,10 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '/', // 默认到recommend
+      redirect: '/recommend'
+    },
+    {
       path: '/recommend',
       component: Reacommend
     },
