@@ -1,5 +1,7 @@
 import jsonp from '../common/js/jsonp'
 import {commonParams, options} from './config'
+import axios from 'axios'
+// 请求轮播图数据
 export function getRecommend() {
   const url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
   // 模拟配置请求的所需参数
@@ -9,4 +11,26 @@ export function getRecommend() {
     needNewCode: 1
   })
   return jsonp(url, data, options)
+}
+// 直接请求受到了host和referer的限制,自己利用后端node代理
+export function getDiscList() { // 请求歌单数据
+  const url = '/api/getDiscList'
+
+  const data = Object.assign({}, commonParams, {
+    platform: 'yqq',
+    hostUin: 0,
+    sin: 0,
+    ein: 29,
+    sortId: 5,
+    needNewCode: 0,
+    categoryId: 10000000,
+    rnd: Math.random(),
+    format: 'json' // 格式化数据
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  })
 }
