@@ -1,6 +1,6 @@
 <template>
-  <div>
-    I am singer
+  <div class="singer">
+    <listview :data="singers"></listview>
   </div>
 </template>
 
@@ -8,6 +8,7 @@
   import {getSingerList} from 'api/singer'
   import {ERR_OK} from 'api/config'
   import Singer from 'common/js/singer'
+  import Listview from 'base/listview/listview'
   let HOT_NAME = '热门'
   let HOT_SINGER_LEN = 10
   export default {
@@ -74,6 +75,9 @@
         })
         return hot.concat(ret) // 拼接数组 得到一维数组
       }
+    },
+    components: {
+      Listview
     }
   }
 </script>

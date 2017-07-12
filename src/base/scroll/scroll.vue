@@ -10,7 +10,7 @@
     props: {
       probeType: {
         type: Number,
-        default: 1
+        default: 1 // 1代表节流，３代表实时监听
       },
       click: {
         type: Boolean,
@@ -23,6 +23,10 @@
       refreshDelay: {
         type: Number,
         default: 20
+      },
+      listenScroll: { // 是否需要滚动
+        type: Boolean,
+        default: false
       }
     },
     mounted() {
@@ -39,6 +43,13 @@
           probeType: this.probeType,
           click: this.click
         })
+
+        if (this.listenScroll) {
+          let _this = this
+          this.scroll.on('scroll', (pos) => { // better-scroll默认是滚动的scroll
+            _this.$emit('scroll', pos)
+          })
+        }
       },
       disable() {
         this.scroll && this.scroll.disable()
@@ -48,10 +59,16 @@
       },
       refresh() {
         this.scroll && this.scroll.refresh()
+      },
+      // 滑动到
+      scrollTo() {
+        this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments)
+      },
+      scrollToElement() {
+        this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
       }
     },
     watch: {
-      // 父组件传入的data发生变化重新计算高度
       data() {
         setTimeout(() => {
           this.refresh()
