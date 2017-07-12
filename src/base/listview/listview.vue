@@ -10,7 +10,10 @@
       <li v-for="group in data" class="list-group" ref="listGroup">
         <h2 class="list-group-title">{{group.title}}</h2>
         <ul>
-          <li v-for="item in group.items" class="list-group-item">
+          <li
+            @click="selectItem(item)"
+            v-for="item in group.items"
+            class="list-group-item">
             <img v-lazy="item.avatar" class="avatar">
             <span class="name">{{item.name}}</span>
           </li>
@@ -78,6 +81,9 @@
       }
     },
     methods: {
+      selectItem(item) {
+        this.$emit('select', item)
+      },
       // 点击旁边的字母
       onShortcutTouchStart(e) {
         let anchorIndex = getData(e.target, 'index') // 获取点击事件的index(dom文件封装的方法)

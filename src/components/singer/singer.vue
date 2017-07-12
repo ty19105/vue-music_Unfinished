@@ -1,6 +1,6 @@
 <template>
   <div class="singer">
-    <listview :data="singers"></listview>
+    <listview @select="selectSinger" :data="singers"></listview>
     <router-view></router-view>
   </div>
 </template>
@@ -22,6 +22,12 @@
       this._getSingerList()
     },
     methods: {
+      // 根据当前点击的歌手id跳转到对应的页面
+      selectSinger(singer) {
+        this.$route.push({
+          path: `/singer/${singer.id}`
+        })
+      },
       // 获取歌手数据
       _getSingerList () {
         getSingerList().then((res) => {

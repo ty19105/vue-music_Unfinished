@@ -1,9 +1,11 @@
 <template>
-  <div class="singer-detail"></div>
+  <div class="singer-detail">
+    我是歌手详情
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
-  export default {};
+  export default {}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
