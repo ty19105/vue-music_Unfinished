@@ -38,6 +38,7 @@
   import {getData} from 'common/js/dom'
   // import $ from 'jquery'
   const ANCHOR_HEIGHT = 16
+  const TITLE_HEIGHT = 30
   export default {
     created() {
       this.touch = {}
@@ -48,7 +49,8 @@
     data() {
       return {
         scrollY: -1,
-        currentIndex: 0
+        currentIndex: 0,
+        diff: -1 // 当前首字母开头的歌手区域到fixed的距离
       }
     },
     props: {
@@ -136,12 +138,24 @@
           let height2 = listHeight[i + 1]
           if (-newY >= height1 && -newY < height2) {
             this.currentIndex = i
-//            this.diff = height2 + newY
+            // height2 下一个歌手列表到顶部的高度,newY代表歌手列表到顶部的偏移量(负数)
+            this.diff = height2 + newY
             return
           }
         }
         // 当滚动到底部，且-newY大于最后一个元素的上限
         this.currentIndex = listHeight.length - 2
+      },
+      diff(newVal) {
+        console.log(newVal)
+        let fixedTop = (newVal > 0 && newVal < TITLE_HEIGHT) ? newVal - TITLE_HEIGHT : 0
+
+        if (this.fixedTop === fixedTop) {
+          return
+        }
+        this.fixedTop === fixedTop
+        // 改变fixed的偏移量
+        this.$refs.fixed.style.transform = `translate3d(0,${fixedTop}px,0)`
       }
     },
     components: {
