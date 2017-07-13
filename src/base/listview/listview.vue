@@ -105,7 +105,7 @@
       },
       // 歌手列表到相应的位置
       _scrollTo(index) {
-        console.log(index)
+        // console.log(index)
         if (!index && index !== 0) {
           return // 过滤掉index=null的情况
         }

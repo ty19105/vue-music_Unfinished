@@ -24,7 +24,7 @@
     methods: {
       // 根据当前点击的歌手id跳转到对应的页面
       selectSinger(singer) {
-        this.$route.push({
+        this.$router.push({
           path: `/singer/${singer.id}`
         })
       },
