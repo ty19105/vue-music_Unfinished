@@ -7,11 +7,17 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import $ from 'jquery'
   import {mapGetters} from 'vuex' // vuex封装的获取值的语法糖
   import {getSingerDetail} from 'api/singer'
   import {ERR_OK} from 'api/config'
-
+  import {createSong} from 'common/js/song'
   export default {
+    data() {
+      return {
+        songs: []
+      }
+    },
     computed: {
       ...mapGetters(['singer'])
     },
@@ -27,9 +33,21 @@
         }
         getSingerDetail(this.singer.id).then((res) => {
           if (res.code === ERR_OK) {
-            console.log(res.data.list)
+            this.songs = this._normalizeSongs(res.data.list)
+            console.log(this.songs)
           }
         })
+      },
+      // 抽取歌手详情数据
+      _normalizeSongs(list) {
+        let ret = []
+        $.each(list, (index, item) => {
+          let {musicData} = item
+          if (musicData.songid && musicData.albummid) {
+            ret.push(createSong(musicData))
+          }
+        })
+        return ret
       }
     }
   }
