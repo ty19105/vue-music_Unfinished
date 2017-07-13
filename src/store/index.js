@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as actions from './actions'
 import * as getters from './getters'
-import  state from './state'
+import state from './state'
 import mutations from './mutations'
 import createLogger from 'vuex/dist/logger' // 每次修改在控制台打印日志
 Vue.use(Vuex)

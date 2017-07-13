@@ -10,8 +10,10 @@
   import {ERR_OK} from 'api/config'
   import Singer from 'common/js/singer'
   import Listview from 'base/listview/listview'
-  let HOT_NAME = '热门'
-  let HOT_SINGER_LEN = 10
+  import {mapMutations} from 'vuex' // 语法糖
+
+  const HOT_NAME = '热门'
+  const HOT_SINGER_LEN = 10
   export default {
     data() {
       return {
@@ -27,6 +29,7 @@
         this.$router.push({
           path: `/singer/${singer.id}`
         })
+        this.setSinger(singer) // 设置setSinger的值为歌手id
       },
       // 获取歌手数据
       _getSingerList () {
@@ -81,7 +84,10 @@
           return a.title.charCodeAt(0) - b.title.charCodeAt(0)
         })
         return hot.concat(ret) // 拼接数组 得到一维数组
-      }
+      },
+      ...mapMutations({
+        setSinger: 'SET_SINGER' // 通过语法糖配置要设置的常量
+      })
     },
     components: {
       Listview
