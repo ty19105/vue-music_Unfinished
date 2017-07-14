@@ -20,8 +20,13 @@
 <script type="text/ecmascript-6">
   import Scroll from '../../base/scroll/scroll.vue'
   import Songlist from '../../base/song-list/song-list.vue'
+  import {prefixStyle} from '../../common/js/dom'
 
   const RESERVED_HEIGHT = 40
+  // 添加前缀
+  const transform = prefixStyle('transform')
+  const backdrop = prefixStyle('backdrop-filter')
+
   export default {
     props: {
       bgImage: {
@@ -71,7 +76,7 @@
         let zIndex = 0
         let scale = 1 // 缩放倍数
         let blur = 0 // 模糊度
-        this.$refs.layer.style.transform = `translate3d(0,${translateY}px,0)`
+        this.$refs.layer.style[transform] = `translate3d(0,${translateY}px,0)`
 
         // bgImage下拉情况放大
         const percent = Math.abs(newY / this.imageHeight)
@@ -81,7 +86,7 @@
         } else { // 上滑模糊
           blur = Math.min(20 * percent, 20)
         }
-        this.$refs.filter.style['backdrop-filter'] = `blur(${blur}px)`
+        this.$refs.filter.style[backdrop] = `blur(${blur}px)`
         if (newY < this.minTransalteY) {
           zIndex = 10
           this.$refs.bgImage.style.paddingTop = 0
@@ -92,7 +97,7 @@
         }
 
         this.$refs.bgImage.style.zIndex = zIndex
-        this.$refs.bgImage.style.transform = `scale(${scale})`
+        this.$refs.bgImage.style[transform] = `scale(${scale})`
       }
     },
     components: {
