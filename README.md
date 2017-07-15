@@ -161,7 +161,7 @@ vue2.0 vuex node
 ### 安装与运行
 
 ```
-git clone https://github.com/songhaoreact/vue-music.git
+git clone https://github.com/wq93/vue-music.git
 
 cd vue-music
 
