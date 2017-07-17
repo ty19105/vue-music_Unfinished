@@ -9,7 +9,6 @@
             <slider>
               <div v-for="item in recommends">
                 <img class="needsclick" @load="loadImage" :src="item.picUrl">
-                </a>
               </div>
             </slider>
           </div>
