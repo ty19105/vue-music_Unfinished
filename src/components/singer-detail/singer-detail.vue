@@ -29,7 +29,7 @@
     },
     created() {
       this._getDetail()
-      console.log(this.singer)
+      // console.log(this.singer)
     },
     methods: {
       _getDetail() { // 获取歌手详情
