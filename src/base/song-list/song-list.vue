@@ -1,7 +1,9 @@
 <template>
   <div class="song-list">
     <ul>
-      <li v-for="(song,index) in songs" class="item">
+      <li @click="selectItem(song,index)"
+          v-for="(song,index) in songs"
+          class="item">
         <div class="content">
           <h2 class="name">
             {{song.name}}
@@ -9,6 +11,7 @@
           <p class="desc">
             {{getDesc(song)}}
           </p>
+          <span class="displayname">{{song.url}}</span>
         </div>
       </li>
     </ul>
@@ -24,6 +27,10 @@
       }
     },
     methods: {
+      // 点击进入播放器
+      selectItem(item, index) {
+        this.$emit('select', item, index)
+      },
       getDesc(song) {
         return `${song.singer} - ${song.album}`
       }
@@ -72,4 +79,6 @@
           no-wrap()
           margin-top: 4px
           color: $color-text-d
+        .displayname
+          display: none
 </style>

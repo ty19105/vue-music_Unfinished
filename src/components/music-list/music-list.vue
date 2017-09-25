@@ -17,7 +17,7 @@
     <scroll :data="songs" @scroll="scroll"
             :listen-scroll="listenScroll" :probe-type="probeType" class="list" ref="list">
       <div class="song-list-wrapper">
-        <songlist :songs="songs" :rank="rank"></songlist>
+        <songlist @select="selectItem" :songs="songs" :rank="rank"></songlist>
       </div>
       <div class="loading-container" v-show="!songs.length">
         <loading></loading>
@@ -31,6 +31,7 @@
   import Songlist from '../../base/song-list/song-list.vue'
   import Loading from '../../base/loading/loading.vue'
   import {prefixStyle} from '../../common/js/dom'
+  import {mapActions} from 'vuex' // vuex定义的语法糖
 
   const RESERVED_HEIGHT = 40
   // 添加前缀
@@ -81,7 +82,16 @@
       },
       back() {
         this.$router.back() // 回退到上一级
-      }
+      },
+      selectItem(item, index) {
+        this.selectPlay({
+          list: this.songs,
+          index
+        })
+      },
+      ...mapActions([
+        'selectPlay'
+      ])
     },
     watch: {
       scrollY(newY) {
