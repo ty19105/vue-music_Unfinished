@@ -7,14 +7,6 @@
 
 vue2.0 vuex node
 
-## 代码演示
-
-[项目演示地址] (http://47.92.26.198:9000/)
-
-![二维码](http://qr.api.cli.im/qr?data=http%253A%252F%252F47.92.26.198%253A9000%252F&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=f349d2cedbecf0b7655323193ed801b2)
-
-
-
 ## 项目树
 ```
 .
